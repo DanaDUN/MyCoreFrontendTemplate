@@ -1,0 +1,76 @@
+@{
+    ViewData["Title"] = "首頁";
+}
+@section Styles {
+    <link href="~/lib/tabulator/css/tabulator.min.css" rel="stylesheet" />
+    <style>
+        .card,
+        .btn-group {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .fullscreen-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.7); /* 半透明白色背景 */
+            z-index: 2000; /* 確保在最上層 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .autocomplete-list {
+            position: absolute;
+            z-index: 999;
+            background: white;
+            border: 1px solid #ccc;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .autocomplete-item {
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+            .autocomplete-item:hover {
+                background-color: #c2c2c2;
+            }
+
+            .autocomplete-item.active {
+                background-color: #007bff;
+                color: white;
+            }
+
+    </style>
+}
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@{
+    var token = Xsrf.GetAndStoreTokens(ViewContext.HttpContext).RequestToken;
+}
+<input type="hidden" id="RequestVerificationToken" name="__RequestVerificationToken" value="@token" />
+
+<div class="container px-0">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mt-2">
+                <div class="card-body py-2 px-3">
+                  @* 內容 *@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        // 配置 Url 參數
+        const Url = '@Url.Action("", "MyConn")'; // 抓取Controller Action
+    </script>
+    <script src="~/lib/tabulator/js/tabulator.min.js"></script>
+    <script type="module" src="~/js/myjs.js" asp-append-version="true"></script>
+}
